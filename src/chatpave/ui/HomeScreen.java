@@ -10,7 +10,7 @@ import javax.microedition.lcdui.Font;
 import javax.microedition.lcdui.Graphics;
 
 /**
- * The main dashboard screen. This version now navigates to other screens.
+ * The main dashboard screen. This version has a complete icon set.
  */
 public class HomeScreen extends Canvas {
 
@@ -123,30 +123,79 @@ public class HomeScreen extends Canvas {
         }
     }
     
-    private void drawIcon(Graphics g, int iconIndex, int centerX, int centerY) {
+    /**
+     * A master function to call the correct icon drawing method.
+     * This version includes drawings for all icons.
+     */
+    private void drawIcon(Graphics g, int iconIndex, int cx, int cy) {
         g.setColor(COLOR_ICON_PRIMARY);
         switch (iconIndex) {
-            case 0: // News Feed
-                g.drawRect(centerX - 12, centerY - 10, 24, 20);
-                g.drawLine(centerX - 10, centerY - 5, centerX + 10, centerY - 5);
-                g.drawLine(centerX - 10, centerY, centerX + 10, centerY);
-                g.drawLine(centerX - 10, centerY + 5, centerX + 10, centerY + 5);
-                break;
-            case 1: // Messages
-                g.drawRoundRect(centerX - 14, centerY - 10, 28, 20, 8, 8);
-                g.drawLine(centerX - 14, centerY + 10, centerX - 4, centerY + 15);
-                g.drawLine(centerX - 4, centerY + 15, centerX, centerY + 10);
-                break;
-            case 2: // Add Friend
-                g.fillArc(centerX - 10, centerY - 12, 20, 20, 0, 360);
-                g.fillRect(centerX + 5, centerY - 15, 3, 10);
-                g.fillRect(centerX + 1, centerY - 11, 10, 3);
-                break;
-            default: // Placeholder
-                g.drawRect(centerX - 15, centerY - 15, 30, 30);
-                g.drawLine(centerX - 10, centerY - 10, centerX + 10, centerY + 10);
-                break;
+            case 0: drawNewsFeedIcon(g, cx, cy); break;
+            case 1: drawMessagesIcon(g, cx, cy); break;
+            case 2: drawAddFriendIcon(g, cx, cy); break;
+            case 3: drawNotificationsIcon(g, cx, cy); break;
+            case 4: drawPhotosIcon(g, cx, cy); break;
+            case 5: drawProfileIcon(g, cx, cy); break;
+            case 6: drawFriendsIcon(g, cx, cy); break;
+            case 7: drawSearchIcon(g, cx, cy); break;
+            case 8: drawSettingsIcon(g, cx, cy); break;
+            default: break;
         }
+    }
+
+    // --- Programmatic Icon Drawing ---
+
+    private void drawNewsFeedIcon(Graphics g, int cx, int cy) {
+        g.drawRect(cx - 15, cy - 12, 30, 24);
+        g.drawLine(cx - 12, cy - 8, cx + 12, cy - 8);
+        g.drawLine(cx - 12, cy - 2, cx + 12, cy - 2);
+        g.drawLine(cx - 12, cy + 4, cx + 12, cy + 4);
+    }
+
+    private void drawMessagesIcon(Graphics g, int cx, int cy) {
+        g.drawRoundRect(cx - 16, cy - 12, 32, 22, 8, 8);
+        g.drawLine(cx - 10, cy + 10, cx - 2, cy + 16);
+        g.drawLine(cx - 2, cy + 16, cx + 4, cy + 10);
+    }
+
+    private void drawAddFriendIcon(Graphics g, int cx, int cy) {
+        g.fillArc(cx - 14, cy - 10, 20, 20, 0, 360); // Head
+        g.fillRect(cx + 4, cy - 15, 4, 12); // Plus vertical
+        g.fillRect(cx, cy - 11, 12, 4); // Plus horizontal
+    }
+
+    private void drawNotificationsIcon(Graphics g, int cx, int cy) {
+        g.drawArc(cx - 12, cy - 12, 24, 24, 45, 270); // Bell shape
+        g.fillRect(cx - 2, cy + 12, 4, 4); // Clapper
+    }
+
+    private void drawPhotosIcon(Graphics g, int cx, int cy) {
+        g.drawRect(cx - 16, cy - 12, 22, 22); // Frame
+        g.fillArc(cx - 10, cy + 2, 8, 8, 0, 360); // Sun
+        g.drawLine(cx, cy - 8, cx + 4, cy - 2); // Mountain
+        g.drawLine(cx + 4, cy - 2, cx + 8, cy - 8); // Mountain
+    }
+
+    private void drawProfileIcon(Graphics g, int cx, int cy) {
+        g.fillArc(cx - 8, cy - 12, 16, 16, 0, 360); // Head
+        g.fillArc(cx - 14, cy + 4, 28, 20, 0, 180); // Body
+    }
+
+    private void drawFriendsIcon(Graphics g, int cx, int cy) {
+        g.fillArc(cx - 16, cy - 8, 16, 16, 0, 360); // Left head
+        g.fillArc(cx, cy - 8, 16, 16, 0, 360); // Right head
+        g.fillArc(cx - 12, cy + 8, 24, 16, 0, 180); // Shared body
+    }
+
+    private void drawSearchIcon(Graphics g, int cx, int cy) {
+        g.drawArc(cx - 14, cy - 14, 20, 20, 0, 360); // Magnifying glass circle
+        g.drawLine(cx, cy, cx + 10, cy + 10); // Handle
+    }
+    
+    private void drawSettingsIcon(Graphics g, int cx, int cy) {
+        g.fillArc(cx - 10, cy - 10, 20, 20, 0, 360); // Center gear
+        g.setColor(COLOR_BACKGROUND);
+        g.fillArc(cx - 5, cy - 5, 10, 10, 0, 360); // Hole in gear
     }
 
     // --- Input Handling ---

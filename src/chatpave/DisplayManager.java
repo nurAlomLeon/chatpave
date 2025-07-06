@@ -8,11 +8,12 @@ import chatpave.ui.ChatScreen;
 import chatpave.ui.HomeScreen;
 import chatpave.ui.LoginScreen;
 import chatpave.ui.MessagesScreen;
-import chatpave.ui.NewsFeedScreen; // Assuming you will create this
+import chatpave.ui.NewsFeedScreen; // Import the NewsFeedScreen
 import chatpave.ui.RegistrationScreen;
 import chatpave.ui.SplashScreen;
 import javax.microedition.lcdui.Display;
 import javax.microedition.lcdui.Displayable;
+import chatpave.ui.DebugScreen; // Import the new DebugScreen
 
 /**
  * A singleton utility class to manage screen transitions.
@@ -35,9 +36,6 @@ public class DisplayManager {
         }
     }
 
-    /**
-     * The app's entry point. It now correctly calls loadSession().
-     */
     public static void startApp() {
         if (AuthManager.loadSession()) {
             System.out.println("Session found, skipping login.");
@@ -64,25 +62,24 @@ public class DisplayManager {
         show(new MessagesScreen());
     }
 
-    /**
-     * Shows the individual chat screen with a specific user.
-     * This version correctly accepts the partner's details.
-     * @param partnerId The ID of the user to chat with.
-     * @param partnerUsername The username of the person to chat with.
-     */
     public static void showChatScreen(int partnerId, String partnerUsername) {
         show(new ChatScreen(partnerId, partnerUsername));
     }
     
+    /**
+     * Shows the main news feed screen.
+     * This now correctly creates and shows the NewsFeedScreen.
+     */
     public static void showNewsFeedScreen() {
-        // This is a placeholder for when you create the NewsFeedScreen
-        // show(new NewsFeedScreen());
-        System.out.println("Navigating to News Feed (Screen not yet created).");
+        show(new NewsFeedScreen());
     }
 
     public static void exitApp() {
         if (midlet != null) {
             midlet.destroyApp(false);
         }
+    }
+        public static void showDebugScreen(String title, String content) {
+        show(new DebugScreen(title, content));
     }
 }

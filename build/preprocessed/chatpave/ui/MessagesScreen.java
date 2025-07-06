@@ -43,7 +43,7 @@ public class MessagesScreen extends Canvas implements Runnable {
         // **MODIFICATION**: Check if the list is empty AND if the debug log has content.
         if (conversations.isEmpty() && ApiClient.debugLog.length() > 0) {
             // If parsing failed, show the debug screen instead.
-            DisplayManager.show(new DebugScreen(ApiClient.debugLog.toString()));
+            //DisplayManager.show(new DebugScreen(ApiClient.debugLog.toString()));
         } else {
             // Otherwise, repaint this screen normally.
             repaint();
